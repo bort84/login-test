@@ -1,0 +1,36 @@
+/* Base Styles
+-------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------- */
+/* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+/* Element Adjustments */
+main {
+	display: block; /* IE! */
+}
+
+img {
+	margin: 0;
+	max-width: 100%;
+	height: auto;
+}
+
+figure {
+	margin: 0;
+}
+
+/* Body */
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	font-family: $font-one;
+	font-size: $base-font-size;
+	line-height: $base-line-height;
+}
