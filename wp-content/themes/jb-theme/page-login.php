@@ -15,20 +15,27 @@
         $password_error = 'This field is required';
     }
 
-    $creds = [
-        'user_login' => $username,
-        'user_password' => $password,
-        'remember' => $remember,
-    ];
+    if (empty($username_error) && empty($password_error)) {
+        $creds = [
+            'user_login' => $username,
+            'user_password' => $password,
+            'remember' => $remember,
+        ];
 
-    // parse creds through sign on and return true or false
-    $user = wp_signon($creds, false);
+        // parse creds through sign on and return true or false
+        $user = wp_signon($creds, false);
 
-    if (is_wp_error($user)) {
-        // do nothing
-    } else {
-        wp_safe_redirect(home_url());
-        exit;
+        if (is_wp_error($user)) {
+            $login_error = 'Invalid username or password';
+        } else {
+            // Clear previous auth cookies
+            wp_clear_auth_cookie();
+            // Set the current auth cookies
+            wp_set_auth_cookie($user->ID, $remember);
+            // Redirect to dashboard
+            wp_safe_redirect(home_url());
+            exit;
+        }
     }
 } ?>
 
@@ -45,31 +52,34 @@
                     
                     <form action="" method="post" autocomplete="on">
                         <label for="username" class="required">Username or Email Address</label>
-                        <input placeholder="Email@domain.com" type="text" name="username" id="username" autocomplete="on">
+                        <input type="text" name="username" id="username" autocomplete="on" value="<?php echo isset($username) ? esc_attr($username) : ''; ?>">
                         <?php if (!empty($username_error)): ?>
                                 <p class="error"><?php echo $username_error; ?></p>
-                            <?php endif; ?>
+                        <?php endif; ?>
                         <label for="password" class="required">Password</label>
                         <input type="password" name="password" id="password" autocomplete="on">
                         <?php if (!empty($password_error)): ?>
                                 <p class="error"><?php echo $password_error; ?></p>
-                            <?php endif; ?>
+                        <?php endif; ?>
                         <label for="remember" class="remember-me">Remember Me
                             <input type="checkbox" name="remember" id="remember"> 
                             <span class="checkmark"></span>
                         </label>
                         <button type="submit">Log in</button>
                         <?php wp_nonce_field('user_login', 'login_nonce'); ?>
+                        <?php if (!empty($login_error)): ?>
+                            <p class="error"><?php echo $login_error; ?></p>
+                        <?php endif; ?>
                     </form>
 
                     <p class="help">Don't have an account? <a href="/register">Create one</a></p>
                 </div>
             </div>
             <div class="right-content" style="background: url(<?php echo get_stylesheet_directory_uri(); ?>/img/right-bg.jpg) no-repeat center center; background-size: cover;">
-                <?php // Get thumbnail and ACF fields
-
+                <?php 
+                // Get thumbnail and ACF fields
                 $thumbnail_ID = get_post_thumbnail_id(get_the_ID());
-                $featured_image = wp_get_attachment_image( $thumbnail_ID, 'full');
+                $featured_image = wp_get_attachment_image($thumbnail_ID, 'full');
                 $image_header = get_field('image_header'); 
                 $image_text = get_field('image_text'); 
                 

@@ -83,7 +83,11 @@ define('WP_DEBUG', true);
 
 /* Add any custom values between this line and the "stop editing" line. */
 
-
+define('COOKIE_DOMAIN', $_SERVER['HTTP_HOST']);
+define('COOKIEPATH', '/');
+if ( ! defined( 'COOKIE_SECURE' ) ) {
+    define( 'COOKIE_SECURE', isset( $_SERVER['HTTPS'] ) );
+}
 
 /* That's all, stop editing! Happy publishing. */
 

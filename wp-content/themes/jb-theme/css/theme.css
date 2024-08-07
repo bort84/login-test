@@ -821,7 +821,7 @@ body {
 .page-template-page-register form input {
   display: block;
   border: none;
-  color: #3C455E;
+  color: #9CA4AE;
   font-size: 18px; }
   .page-template-page-login form input:focus,
   .page-template-page-register form input:focus {
@@ -832,17 +832,6 @@ body {
   border-bottom: 1px solid #AFBDCB;
   width: 100%;
   padding: 15px 0 5px; }
-  .page-template-page-login form input[type=text]::-webkit-input-placeholder, .page-template-page-register form input[type=text]::-webkit-input-placeholder {
-    color: #9CA4AE; }
-  .page-template-page-login form input[type=text]::-moz-placeholder, .page-template-page-register form input[type=text]::-moz-placeholder {
-    color: #9CA4AE; }
-  .page-template-page-login form input[type=text]:-ms-input-placeholder, .page-template-page-register form input[type=text]:-ms-input-placeholder {
-    color: #9CA4AE; }
-  .page-template-page-login form input[type=text]::-ms-input-placeholder, .page-template-page-register form input[type=text]::-ms-input-placeholder {
-    color: #9CA4AE; }
-  .page-template-page-login form input[type=text]::placeholder,
-  .page-template-page-register form input[type=text]::placeholder {
-    color: #9CA4AE; }
 
 .page-template-page-login form input[type=password],
 .page-template-page-register form input[type=password] {

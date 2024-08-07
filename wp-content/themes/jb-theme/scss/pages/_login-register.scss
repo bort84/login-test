@@ -205,7 +205,7 @@
         input {
             display: block;
             border: none;
-            color: #3C455E;
+            color: #9CA4AE;
             font-size: 18px;
     
             &:focus {
@@ -217,10 +217,6 @@
             border-bottom: 1px solid #AFBDCB;
             width: 100%;
             padding: 15px 0 5px;
-    
-            &::placeholder {
-                color: #9CA4AE;
-            }
         }
     
         input[type=password] {
